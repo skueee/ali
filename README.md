@@ -14,7 +14,7 @@ A tool to create "aliases", custom commands to run much longer ones easily and t
 
 Execute :
 ```
-sudo pipx install https://github.com/skueee/ali.git --global
+sudo pipx install git+https://github.com/skueee/ali.git --global
 ```
 Then :
 ```
