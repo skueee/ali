@@ -25,8 +25,11 @@ def main(is_global, command_name, command):
     if not os.path.isdir(Path(path)):
         os.mkdir(Path(path))
 
-    with open(f"{path}bin/{command_name}", 'x') as f:
-        f.write(command)
+    try:
+        with open(f"{path}bin/{command_name}", 'x') as f:
+            f.write(command)
+    except FileExistsError:
+        print("The command already exists !")
 
     print("Done, you can now execute the command !\nTo manage it, execute ali manage [command] [remove/edit]")
     sys.exit(0)
