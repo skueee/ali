@@ -30,6 +30,7 @@ def main(is_global, command_name, command):
             f.write(command)
     except FileExistsError:
         print("The command already exists !")
+        sys.exit(0)
 
     print("Done, you can now execute the command !\nTo manage it, execute ali manage [command] [remove/edit]")
     sys.exit(0)
