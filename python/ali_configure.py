@@ -25,8 +25,7 @@ def create_dir(directory):
     except PermissionError:
         print('\033[31mPermission denied: Unable to create the directory.\033[0m')
 
-def check_if_line_in_file(file, line):
-    linelist = file.readlines()
+def check_if_line_in_file(linelist, line):
     found = False
     for x in linelist:
         if line in x:
@@ -36,9 +35,10 @@ def check_if_line_in_file(file, line):
         return False
 
 def is_configured():
-    with open('etc/bash.bashrc', 'r') as f:
-        local_status = check_if_line_in_file(f, "~/.ali/bin")
-        global_status = check_if_line_in_file(f, "/opt/ali/bin")
+    with open('/etc/bash.bashrc', 'r') as f:
+        linelist = f.readlines()
+    local_status = check_if_line_in_file(linelist, 'export PATH="$PATH:~/.ali/bin"')
+    global_status = check_if_line_in_file(linelist, 'export PATH="$PATH:/opt/ali/bin"')
 
     return bool(local_status and global_status)
 
