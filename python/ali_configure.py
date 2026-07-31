@@ -1,12 +1,10 @@
 import os
 import pwd
-import shutil
-import stat
-import subprocess
 import sys
 from pathlib import Path
 
 import ali_module as ali
+
 
 def add_to_path(directory):
     export_line = f'\nexport PATH="$PATH:{directory}"\n'
@@ -27,29 +25,35 @@ def create_dir(directory):
     except PermissionError:
         print('\033[31mPermission denied: Unable to create the directory.\033[0m')
 
+def check_if_line_in_file(file, line):
+    linelist = file.readlines()
+    found = False
+    for x in linelist:
+        if line in x:
+            found = True
+            return True
+    if not found:
+        return False
+
 def is_configured():
-    return os.path.isfile(Path("/etc/profile.d/ali.sh"))
+    with open('etc/bash.bashrc', 'r') as f:
+        local_status = check_if_line_in_file(f, "~/.ali/bin")
+        global_status = check_if_line_in_file(f, "/opt/ali/bin")
+
+    return bool(local_status and global_status)
 
 def configure():
     ali.get_sudo()
 
-    shutil.copy('userd-template.sh', '/etc/profile.d/ali.sh')
-
-    st = os.stat('/etc/profile.d/ali.sh')
-    os.chmod('/etc/profile.d/ali.sh', st.st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
-
-    user_info = pwd.getpwnam(os.environ.get("SUDO_USER"))
+    user_info = pwd.getpwnam(str(os.environ.get("SUDO_USER")))
     create_dir("/opt/ali/")
     create_dir("/opt/ali/bin/")
     add_to_path("/opt/ali/bin")
-    create_dir(f"{pwd.getpwnam(os.environ.get("SUDO_USER")).pw_dir}/.ali/")
-    os.chown(Path(f"{pwd.getpwnam(os.environ.get("SUDO_USER")).pw_dir}/.ali/"), user_info.pw_uid, user_info.pw_gid)
-    create_dir(f"{pwd.getpwnam(os.environ.get("SUDO_USER")).pw_dir}/.ali/bin/")
-    os.chown(Path(f"{pwd.getpwnam(os.environ.get("SUDO_USER")).pw_dir}/.ali/bin"), user_info.pw_uid, user_info.pw_gid)
-    add_to_path(f"{pwd.getpwnam(os.environ.get("SUDO_USER")).pw_dir}/.ali/bin")
-    print("Directories created !")
+    create_dir(f"{pwd.getpwnam(str(os.environ.get("SUDO_USER"))).pw_dir}/.ali/")
+    os.chown(Path(f"{pwd.getpwnam(str(os.environ.get("SUDO_USER"))).pw_dir}/.ali/"), user_info.pw_uid, user_info.pw_gid)
+    create_dir(f"{pwd.getpwnam(str(os.environ.get("SUDO_USER"))).pw_dir}/.ali/bin/")
+    os.chown(Path(f"{pwd.getpwnam(str(os.environ.get("SUDO_USER"))).pw_dir}/.ali/bin"), user_info.pw_uid, user_info.pw_gid)
+    add_to_path("~/.ali/bin")
 
-    subprocess.call(['/bin/bash', '/etc/profile.d/ali.sh'])
-    print("Path edited !")
-
+    print('Ali is configured !\nTo create your first command, run ali create [command name] ["command"]')
     sys.exit()
