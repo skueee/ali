@@ -1,0 +1,26 @@
+name: Feature request
+description: Beg for a feature
+title: "[Feat]: "
+labels: ["feat"]
+type: feature
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking time to contribute !
+  - type: textarea
+    id: feature-requested
+    attributes:
+      label: Which feature would you want to have ?
+      placeholder: "I want a spinning cat"
+  - type: textarea
+    id: current-solution
+    attributes:
+      label: Current solution
+      description: "Is there any way to do that currently ?"
+      placeholder: "We can achieve that by putting the pc in rice and..."
+  - type: textarea
+    id: implementation
+    attributes:
+      label: How would you want to use that feature ?
+      placeholder: "ali cat spin [speed]"
