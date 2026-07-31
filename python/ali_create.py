@@ -28,4 +28,5 @@ def main(is_global, command_name, command):
     with open(f"{path}bin/{command_name}", 'x') as f:
         f.write(command)
 
+    print("Done, you can now execute the command !\nTo manage it, execute ali manage [command] [remove/edit]")
     sys.exit(0)
