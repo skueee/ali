@@ -33,7 +33,10 @@ def main(is_global, command_name, command):
         print("The command already exists !")
         sys.exit(0)
 
-    os.chmod(f"{path}bin/{command_name}", os.stat(f"{path}bin/{command_name}").st_mode | stat.S_IXUSR)
+    os.chmod(
+        f"{path}bin/{command_name}",
+        os.stat(f"{path}bin/{command_name}").st_mode | 0o555,
+    )
 
     print("Done, you can now execute the command !\nTo manage it, execute ali manage [command] [remove/edit]")
     sys.exit(0)
