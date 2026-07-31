@@ -1,4 +1,5 @@
 import os
+import stat
 import sys
 from pathlib import Path
 
@@ -31,6 +32,8 @@ def main(is_global, command_name, command):
     except FileExistsError:
         print("The command already exists !")
         sys.exit(0)
+
+    os.chmod(f"{path}bin/{command_name}", os.stat(f"{path}bin/{command_name}").st_mode | stat.S_IXUSR)
 
     print("Done, you can now execute the command !\nTo manage it, execute ali manage [command] [remove/edit]")
     sys.exit(0)
