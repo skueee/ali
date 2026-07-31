@@ -1,5 +1,9 @@
 export errors=0
 
+echo $PATH
+echo $HOSTNAME
+echo $HOME
+
 if ! [ -d "$HOME/.ali/bin" ]; then
     echo "ERROR: $HOME/.ali/bin does not exist after configuring"
     ((errors++))
