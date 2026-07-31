@@ -3,7 +3,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-import ali_module as ali
+from . import ali_module as ali
 
 
 def get_commands_list(directory: Path):

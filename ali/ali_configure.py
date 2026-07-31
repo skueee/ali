@@ -3,7 +3,7 @@ import pwd
 import sys
 from pathlib import Path
 
-import ali_module as ali
+from . import ali_module as ali
 
 
 def add_to_path(directory):

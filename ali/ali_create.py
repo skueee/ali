@@ -3,8 +3,8 @@ import stat
 import sys
 from pathlib import Path
 
-import ali_configure as configure
-import ali_module as ali
+from . import ali_configure as configure
+from . import ali_module as ali
 
 
 def get_path(is_global):
