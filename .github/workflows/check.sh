@@ -1,6 +1,6 @@
 export errors=0
 
-export PATH=$PATH:"$HOME/.ali/bin:/opt/ali/bin"
+export PATH="$PATH:$HOME/.ali/bin:/opt/ali/bin"
 
 if ! [ -d "$HOME/.ali/bin" ]; then
     echo "ERROR: $HOME/.ali/bin does not exist after configuring"
