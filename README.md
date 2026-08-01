@@ -23,9 +23,9 @@ sudo ali configure
 
 ### Executing program
 
-To create a command, execute `ali create [command name] "[command]"`. You can use the -g or --global flag with sudo to make this command available globally
+To create an alias, execute `ali create [alias] "[command]"`. You can use the -g or --global flag with sudo to make this alias available globally
 
-To list commands, execute `ali manage list`. To delete/edit a command, execute `ali manage [command] [remove/edit]`
+To list aliases, execute `ali manage list`. To delete/edit an alias, execute `ali manage [alias] [remove/edit]`
 
 ## Contributors
 
@@ -35,9 +35,9 @@ To list commands, execute `ali manage list`. To delete/edit a command, execute `
 
 ## Features
 
-- Create commands
-- Make commands available globally
-- Manage commands
+- Create aliases
+- Make aliases available globally
+- Manage aliases
 
 ## License
 

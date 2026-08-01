@@ -29,7 +29,7 @@ def main(is_global, command_name, command):
         with open(f"{path}bin/{command_name}", 'x') as f:
             f.write(command)
     except FileExistsError:
-        print("The command already exists !")
+        print("The alias already exists !")
         sys.exit(0)
 
     os.chmod(
@@ -37,5 +37,5 @@ def main(is_global, command_name, command):
         os.stat(f"{path}bin/{command_name}").st_mode | 0o555,
     )
 
-    print("Done, you can now execute the command !\nTo manage it, execute ali manage [command] [remove/edit]")
+    print("Done, you can now execute the command !\nTo manage it, execute ali manage [alias] [remove/edit]")
     sys.exit(0)
