@@ -13,14 +13,14 @@ def list_commands():
     user_commands = get_commands_list(Path(f"{os.path.expanduser("~")}/.ali/bin/"))
     global_commands = get_commands_list(Path("/opt/ali/bin"))
 
-    print('\033[0;34mUser commands :\033[0m')
+    print('\033[0;34mUser aliases :\033[0m')
     try:
         for i in user_commands:
             print(i)
     except TypeError:
         print("No command")
     print("\n")
-    print('\033[0;34mGlobal commands :\033[0m')
+    print('\033[0;34mGlobal aliases :\033[0m')
     try:
         for i in global_commands:
             print(i)
@@ -52,5 +52,5 @@ def main(command, action):
             print("Action not valid, try something else")
             sys.exit(1)
     else:
-        print("Command not found in ali directories")
+        print("Alias not found in ali directories")
         sys.exit(1)
