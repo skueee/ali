@@ -6,6 +6,7 @@ from pathlib import Path
 
 from . import ali_module as ali
 
+
 def get_user_shell():
     print("What shell you are using?")
     print("1. bash (default)")
@@ -59,10 +60,18 @@ def check_if_line_in_file(linelist, line):
         return False
 
 def is_configured():
-    with open('/etc/bash.bashrc', 'r') as f:
-        linelist = f.readlines()
-    local_status = check_if_line_in_file(linelist, 'export PATH="$PATH:~/.ali/bin"')
-    global_status = check_if_line_in_file(linelist, 'export PATH="$PATH:/opt/ali/bin"')
+    path = os.environ['PATH']
+    path_array = path.split(":")
+    
+    if "~/.ali/bin" in path_array:
+        local_status = True
+    else:
+        local_status = False
+
+    if "/opt/ali/bin" in path_array:
+        global_status = True
+    else:
+        global_status = False
 
     return bool(local_status and global_status)
 
