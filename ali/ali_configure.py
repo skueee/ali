@@ -5,6 +5,18 @@ from pathlib import Path
 
 from . import ali_module as ali
 
+def get_user_shell():
+    print("What shell you are using?")
+    print("1. bash (default)")
+    print("2. fish")
+    shell = input(": ")
+    if shell == "1":
+        return "bash"
+    elif shell == "2":
+        return "fish"
+    else:
+        print("Invalid option. Defaulting to bash.")
+        return "bash"
 
 def add_to_path(directory):
     export_line = f'\nexport PATH="$PATH:{directory}"\n'
@@ -44,6 +56,7 @@ def is_configured():
 
 def configure():
     ali.get_sudo()
+    get_user_shell()
 
     user_info = pwd.getpwnam(str(os.environ.get("SUDO_USER")))
     create_dir("/opt/ali/")
