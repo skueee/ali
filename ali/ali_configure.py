@@ -1,7 +1,7 @@
 import os
 import pwd
-import sys
 import subprocess
+import sys
 from pathlib import Path
 
 from . import ali_module as ali
@@ -37,7 +37,7 @@ def add_to_path(directory, shell):
             print("Fish shell not found. Please install fish shell to use this feature.")
         except subprocess.CalledProcessError as e:
             if e.returncode == 1:
-                print(f"Directory is already in the PATH for fish shell.")
+                print("Directory is already in the PATH for fish shell.")
             else:
                 print(f"An error occurred while trying to add the directory to the PATH in fish shell. Exit Code = {e.returncode}")
 
