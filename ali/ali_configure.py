@@ -31,7 +31,15 @@ def add_to_path(directory, shell):
             else:
                 print("Folder already in PATH")
     elif shell == "fish":
-        subprocess.run(["fish", "-c", f"fish_add_path {directory}"])
+        try:
+            subprocess.run(["fish", "-c", f"fish_add_path {directory}"], check=True)
+        except FileNotFoundError:
+            print("Fish shell not found. Please install fish shell to use this feature.")
+        except subprocess.CalledProcessError as e:
+            if e.returncode == 1:
+                print(f"Directory is already in the PATH for fish shell.")
+            else:
+                print(f"An error occurred while trying to add the directory to the PATH in fish shell. Exit Code = {e.returncode}")
 
 def create_dir(directory):
     try:
