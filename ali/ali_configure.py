@@ -33,7 +33,7 @@ def add_to_path(directory, shell):
                 print("Folder already in PATH")
     elif shell == "fish":
         try:
-            subprocess.run(["fish", "-c", f"fish_add_path {directory}"], check=True)
+            subprocess.run(["su", "-", f"{os.environ.get('SUDO_USER')}", "-c", f"fish -c 'fish_add_path -v {directory}'"], check=True)
         except FileNotFoundError:
             print("Fish shell not found. Please install fish shell to use this feature.")
         except subprocess.CalledProcessError as e:
