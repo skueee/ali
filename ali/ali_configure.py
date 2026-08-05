@@ -63,7 +63,7 @@ def is_configured():
     path = os.environ['PATH']
     path_array = path.split(":")
     
-    if "~/.ali/bin" in path_array:
+    if f"{os.environ.get('HOME')}/.ali/bin" in path_array:
         local_status = True
     else:
         local_status = False
@@ -87,7 +87,7 @@ def configure():
     os.chown(Path(f"{pwd.getpwnam(str(os.environ.get("SUDO_USER"))).pw_dir}/.ali/"), user_info.pw_uid, user_info.pw_gid)
     create_dir(f"{pwd.getpwnam(str(os.environ.get("SUDO_USER"))).pw_dir}/.ali/bin/")
     os.chown(Path(f"{pwd.getpwnam(str(os.environ.get("SUDO_USER"))).pw_dir}/.ali/bin"), user_info.pw_uid, user_info.pw_gid)
-    add_to_path("~/.ali/bin", shell)
+    add_to_path(f"{pwd.getpwnam(str(os.environ.get("SUDO_USER"))).pw_dir}/.ali/bin", shell)
 
     print('Ali is configured !\nTo create your first command, run ali create [command name] ["command"]')
     sys.exit()
